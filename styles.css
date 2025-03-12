@@ -1,3 +1,4 @@
+/*******************************************************************/
 :root {
     --primary-color-1: rgb(82, 182, 232);
     --primary-color-2: rgb(21, 109, 153);
@@ -5,6 +6,7 @@
     --primary-color-4: rgb(255, 251, 225);
 }
 
+/*******************************************************************/
 body {
     font-family: 'Arial', sans-serif;
     background-color: rgb(238, 232, 204);
@@ -17,6 +19,8 @@ body {
     text-align: center;
 }
 
+
+/*******************************************************************/
 /* Header Styling */
 header {
     background: linear-gradient( var(--primary-color-2), var(--primary-color-1));
@@ -48,6 +52,8 @@ header p {
     opacity: 0.8;
 }
 
+/*******************************************************************/
+
 /* Background Info Styling */
 article {
     max-width: 80%;
@@ -58,24 +64,87 @@ article p {
     line-height: 1.75;
 }
 
+/*******************************************************************/
 
 /* Game Styling */
 .game {
     margin-top: 100px;
     margin-bottom: 100px;
+    max-width: 80%;
 }
 
-.match {
-    max-width: 200px;
-    max-height: 200px;
-    object-fit: contain;
+.card {
+    width: 150px;
+    height: 150px;
+    perspective: 1000px;
     cursor: pointer;
-    margin: 10px;
+    margin: 15px;
     border-radius: 10px;
+  }
+  
+  .card-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 1s;
+  }
+  
+  .card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary-color-1);
+    border: 2px solid var(--primary-color-2);
+    border-radius: 10px;
+
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    letter-spacing: 1px;
+    color: var(--primary-color-2);
+    font-size: 1.5em;
+}
+  
+  .card-back {
+    transform: rotateY(180deg);
+  }
+  
+  .flipped .card-inner {
+    transform: rotateY(180deg);
+  }
+  
+  .card-back img {
+    width: 100%;  
+    height: 100%;  
+    object-fit: cover;
+    border-radius: 10px;
+  }
+
+
+/*******************************************************************/
+/* Shuffle Button Styling */
+
+#shuffle {
+    padding: 15px 30px;
+    font-size: 1.2em;
+    background-color: var(--primary-color-1);
+    color: var(--primary-color-4);
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
 
+#shuffle:hover {
+    background-color: var(--primary-color-2);
+}
 
+/*******************************************************************/
 /* Footer Styling */
+
 footer {
     background-color: var(--primary-color-3);
     color: var(--primary-color-4);
@@ -92,3 +161,4 @@ footer a {
 footer a:hover {
     color: var(--primary-color-2);
 }
+/*******************************************************************/
