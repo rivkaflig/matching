@@ -42,3 +42,10 @@ document.addEventListener("DOMContentLoaded", ()=> {
     document.getElementById("shuffle").addEventListener("click", shuffleImages);
 
 })
+
+//Flip card function
+function flipCard(card) {
+    //Adds or removes card from flipped CSS class
+    card.classList.toggle("flipped");
+}
+
