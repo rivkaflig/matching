@@ -13,10 +13,10 @@ document.addEventListener("DOMContentLoaded", ()=> {
         {id: 10, gadol: "Images/Steipler-Gaon.jpg"}
     ];
 
-    const matchElements = document.querySelectorAll(".match"); // HTML collection of elements whose class="match" 
+    const cards = document.querySelectorAll(".card"); // HTML collection of elements whose class="match" 
     
     //duplicate elements
-    matchElements.forEach((element) => {
+    cards.forEach((element) => {
         let clone = element.cloneNode(true);
         element.parentNode.appendChild(clone);
     })
@@ -33,10 +33,10 @@ document.addEventListener("DOMContentLoaded", ()=> {
         }
         shuffleArray(duplicatedMatches);
         
-        const pictures = Array.from(document.querySelectorAll(".match"));
+        const cardpics = Array.from(document.querySelectorAll(".cardpic"));
         //set each picture to one of the matched pictures and remove it once it has been used
-        pictures.forEach(function (pic) {
-            pic.setAttribute("src", duplicatedMatches.pop().gadol);
+        cardpics.forEach(function (pic, index) {
+            pic.setAttribute("src", duplicatedMatches[index].gadol);
         });
     }
     document.getElementById("shuffle").addEventListener("click", shuffleImages);
