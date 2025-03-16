@@ -66,6 +66,18 @@ document.addEventListener("DOMContentLoaded", ()=> {
                 card.removeEventListener("click", flipCard);
             })
         }
+        console.log(flippedCards);
+        // the following does not work as intended!
+        // It is supposed to check if the two elements (cards) in the flippedCards array are identical
+        // =============================================================================================
+        // if (flippedCards[0].getAttribute('data-value') === flippedCards[1].getAttribute('data-value')){
+        //     console.log("You got a match!");
+        // }
+        // else{
+        //     console.log("flip back");
+        //     // flipBack();
+        // }
+        //================================================================================================
         
     }
 })
