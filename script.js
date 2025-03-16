@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", ()=> {
+    const gridContainer = document.querySelector(".grid-container");
 
     const matches = [
         {id: 1, gadol: "Images/R-Chaim.jpg", dataValue: "RChaim", alt: "Rav-Chaim"},
@@ -17,14 +18,30 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
     const cards = document.querySelectorAll(".card"); // HTML collection of elements whose class="card" 
     
-    cards.forEach((element => { 
+   /* cards.forEach((element => { 
         element.addEventListener("click", flipCard);
         for (let i =0; i < 19; i++){
             let clone = element.cloneNode(true); // deep copy - include child elements
-            element.parentNode.appendChild(clone);
+            gridContainer.appendChild(clone);
             clone.addEventListener("click", flipCard);
         }
-    }))
+    })) */
+
+    function appendCards() {
+        for (let i=0; i < 20; i++){
+            const card = document.createElement("div");
+            card.classList.add("card");
+            card.innerHTML = `
+                <div class="card-inner">
+                    <div class="card-front">GEDOLIM MATCH</div>
+                    <div class="card-back"><img class="cardpic"></div>
+                </div>`;
+            gridContainer.appendChild(card);
+            card.addEventListener("click", flipCard);
+        }
+    }
+
+    appendCards();
 
     const cardsDup = document.querySelectorAll(".card"); // updated HTML collection all cards after duplicated
     
