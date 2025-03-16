@@ -93,21 +93,36 @@ document.addEventListener("DOMContentLoaded", ()=> {
             this.removeEventListener("click", flipCard);
 
         } else { 
-        // Adds or removes card from flipped CSS class
-        this.classList.add("flipped");
+            // Adds or removes card from flipped CSS class
+            this.classList.add("flipped");
 
-        // Not yet two flipped cards
-        if (flippedCards.length < 1){
-            flippedCards.push(this);
-        
-        } else {
-            // Don't allow more than two cards to be flipped
-            cardsDup.forEach(card => { 
-                card.removeEventListener("click", flipCard);
-            })
-        }}
-        
+            // Not yet two flipped cards
+            if (flippedCards.length < 1) {
+                flippedCards.push(this);
+            
+            } else {
+                // Don't allow more than two cards to be flipped
+                cardsDup.forEach(card => { 
+                    card.removeEventListener("click", flipCard);
+                })
+            }
+        }
+
+        console.log(flippedCards);
+        // the following does not work as intended!
+        // It is supposed to check if the two elements (cards) in the flippedCards array are identical
+        // =============================================================================================
+        // if (flippedCards[0].getAttribute('data-value') === flippedCards[1].getAttribute('data-value')){
+        //     console.log("You got a match!");
+        // }
+        // else{
+        //     console.log("flip back");
+        //     // flipBack();
+        // }
+        //================================================================================================
+    
     }
+    
 })
 
 
