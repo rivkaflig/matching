@@ -1,24 +1,24 @@
 document.addEventListener("DOMContentLoaded", ()=> {
 
     const matches = [
-        {id: 1, gadol: "Images/R-Chaim.jpg"},
-        {id: 2, gadol: "Images/R-Edelshtein.jpg"},
-        {id: 3, gadol: "Images/R-Elyashiv.jpg"},
-        {id: 4, gadol: "Images/R-Feinstein.jpg"},
-        {id: 5, gadol: "Images/R-Feldmen.jpg"},
-        {id: 6, gadol: "Images/R-Finkel.jpg"},
-        {id: 7, gadol: "Images/R-Salomon.jpg"},
-        {id: 8, gadol: "Images/R-Shapiro.jpg"},
-        {id: 9, gadol: "Images/R-Shteinman.jpg"},
-        {id: 10, gadol: "Images/Steipler-Gaon.jpg"}
+        {id: 1, gadol: "Images/R-Chaim.jpg", dataValue: "RChaim", alt: "Rav-Chaim"},
+        {id: 2, gadol: "Images/R-Edelshtein.jpg", dataValue: "REdelshtein", alt: "Rav-Edelshtein"},
+        {id: 3, gadol: "Images/R-Elyashiv.jpg", dataValue: "RElyashiv", alt: "Rav-Elyashiv"},
+        {id: 4, gadol: "Images/R-Feinstein.jpg", dataValue: "RFeinstein", alt: "Rav-Feinstein"},
+        {id: 5, gadol: "Images/R-Feldmen.jpg", dataValue: "RFeldman", alt: "Rav-Feldman"},
+        {id: 6, gadol: "Images/R-Finkel.jpg", dataValue: "RFinkel", alt: "Rav-Finkel"},
+        {id: 7, gadol: "Images/R-Salomon.jpg", dataValue: "RSalomon", alt: "Rav-Salomon"},
+        {id: 8, gadol: "Images/R-Shapiro.jpg", dataValue: "RShapiro", alt: "Rav-Shapiro"},
+        {id: 9, gadol: "Images/R-Shteinman.jpg", dataValue: "RSteinman", alt: "Rav-Sheinman"},
+        {id: 10, gadol: "Images/Steipler-Gaon.jpg", dataValue: "Steipler", alt: "Steipler-Gaon"}
     ];
 
     const cards = document.querySelectorAll(".card"); // HTML collection of elements whose class="card" 
     //duplicate elements
-    cards.forEach((element) => { 
+    cards.forEach((element => { 
         let clone = element.cloneNode(true); // deep copy - include child elements
         element.parentNode.appendChild(clone);
-    })
+    }))
 
     const cardsDup = document.querySelectorAll(".card"); // updated HTML collection all cards after duplicated
     cardsDup.forEach((element => {
@@ -41,10 +41,12 @@ document.addEventListener("DOMContentLoaded", ()=> {
         //set each picture to one of the matched pictures and remove it once it has been used
         cardpics.forEach(function (pic, index) {
             pic.setAttribute("src", duplicatedMatches[index].gadol);
+            pic.setAttribute("alt", duplicatedMatches[index].alt)
+            pic.parentElement.parentElement.setAttribute("data-value", duplicatedMatches[index].dataValue);
         });
     }
     document.getElementById("shuffle").addEventListener("click", shuffleImages);
-
+    shuffleImages();
 })
 
 //Flip card function
