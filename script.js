@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
         {id: 2, gadol: "Images/R-Edelshtein.jpg", dataValue: "REdelshtein", alt: "Rav-Edelshtein"},
         {id: 3, gadol: "Images/R-Elyashiv.jpg", dataValue: "RElyashiv", alt: "Rav-Elyashiv"},
         {id: 4, gadol: "Images/R-Feinstein.jpg", dataValue: "RFeinstein", alt: "Rav-Feinstein"},
-        {id: 5, gadol: "Images/R-Feldmen.jpg", dataValue: "RFeldman", alt: "Rav-Feldman"},
+        {id: 5, gadol: "Images/R-Feldman.jpg", dataValue: "RFeldman", alt: "Rav-Feldman"},
         {id: 6, gadol: "Images/R-Finkel.jpg", dataValue: "RFinkel", alt: "Rav-Finkel"},
         {id: 7, gadol: "Images/R-Salomon.jpg", dataValue: "RSalomon", alt: "Rav-Salomon"},
         {id: 8, gadol: "Images/R-Shapiro.jpg", dataValue: "RShapiro", alt: "Rav-Shapiro"},
@@ -13,18 +13,21 @@ document.addEventListener("DOMContentLoaded", ()=> {
         {id: 10, gadol: "Images/Steipler-Gaon.jpg", dataValue: "Steipler", alt: "Steipler-Gaon"}
     ];
 
+    let flippedCards = []; // to be used in flipCard()
+
     const cards = document.querySelectorAll(".card"); // HTML collection of elements whose class="card" 
-    //duplicate elements
+    
     cards.forEach((element => { 
-        let clone = element.cloneNode(true); // deep copy - include child elements
-        element.parentNode.appendChild(clone);
+        element.addEventListener("click", flipCard);
+        for (let i =0; i < 19; i++){
+            let clone = element.cloneNode(true); // deep copy - include child elements
+            element.parentNode.appendChild(clone);
+            clone.addEventListener("click", flipCard);
+        }
     }))
 
     const cardsDup = document.querySelectorAll(".card"); // updated HTML collection all cards after duplicated
-    cardsDup.forEach((element => {
-        element.addEventListener("click", flipCard);
-    }))
-
+    
     function shuffleImages() {
         //Duplicate the matches array so that there are two of each element
         const duplicatedMatches = [...matches, ...matches];
@@ -43,15 +46,29 @@ document.addEventListener("DOMContentLoaded", ()=> {
             pic.setAttribute("src", duplicatedMatches[index].gadol);
             pic.setAttribute("alt", duplicatedMatches[index].alt)
             pic.parentElement.parentElement.setAttribute("data-value", duplicatedMatches[index].dataValue);
-        });
+        }); 
+
+        flippedCards = []; // empty this array upon shuffle
     }
+
     document.getElementById("shuffle").addEventListener("click", shuffleImages);
     shuffleImages();
+
+    //Flip card function
+    function flipCard() {
+        //Adds or removes card from flipped CSS class
+        this.classList.add("flipped");
+        if (flippedCards.length < 1){ // not yet two flipped cards
+            flippedCards.push(this);
+        }
+        else{
+            cardsDup.forEach(card => { 
+                card.removeEventListener("click", flipCard);
+            })
+        }
+        
+    }
 })
 
-//Flip card function
-function flipCard() {
-    //Adds or removes card from flipped CSS class
-    this.classList.toggle("flipped");
-}
+
 
