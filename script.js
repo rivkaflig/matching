@@ -13,13 +13,17 @@ document.addEventListener("DOMContentLoaded", ()=> {
         {id: 10, gadol: "Images/Steipler-Gaon.jpg"}
     ];
 
-    const cards = document.querySelectorAll(".card"); // HTML collection of elements whose class="match" 
-    
+    const cards = document.querySelectorAll(".card"); // HTML collection of elements whose class="card" 
     //duplicate elements
-    cards.forEach((element) => {
-        let clone = element.cloneNode(true);
+    cards.forEach((element) => { 
+        let clone = element.cloneNode(true); // deep copy - include child elements
         element.parentNode.appendChild(clone);
     })
+
+    const cardsDup = document.querySelectorAll(".card"); // updated HTML collection all cards after duplicated
+    cardsDup.forEach((element => {
+        element.addEventListener("click", flipCard);
+    }))
 
     function shuffleImages() {
         //Duplicate the matches array so that there are two of each element
@@ -44,8 +48,8 @@ document.addEventListener("DOMContentLoaded", ()=> {
 })
 
 //Flip card function
-function flipCard(card) {
+function flipCard() {
     //Adds or removes card from flipped CSS class
-    card.classList.toggle("flipped");
+    this.classList.toggle("flipped");
 }
 
