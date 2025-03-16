@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
             this.classList.add("flipped");
 
             // Not yet two flipped cards
-            if (flippedCards.length < 1){
+            if (flippedCards.length < 1) {
                 flippedCards.push(this);
             
             } else {
@@ -107,7 +107,6 @@ document.addEventListener("DOMContentLoaded", ()=> {
                 })
             }
         }
-    }
 
         console.log(flippedCards);
         // the following does not work as intended!
@@ -122,6 +121,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
         // }
         //================================================================================================
     
+    }
     
 })
 
