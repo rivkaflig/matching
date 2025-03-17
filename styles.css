@@ -93,9 +93,13 @@ article p {
 /*******************************************************************/
 
 /* Game Styling */
-#click-counter {
+.gameStats {
+    margin-top: 100px;
     font-size: 1.5em;
-    margin: 20px 0;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6;
+    width: auto;
+    height: 100px;
 }
 
 .game {
@@ -190,9 +194,9 @@ article p {
 
 
 /*******************************************************************/
-/* Shuffle Button Styling */
+/* Play Again Button Styling */
 
-#shuffle {
+#play-again {
     padding: 15px 30px;
     font-size: 1.2em;
     background-color: var(--primary-color-2);
@@ -203,7 +207,7 @@ article p {
     transition: background-color 0.3s ease;
 }
 
-#shuffle:hover {
+#play-again:hover {
     background-color: var(--primary-color-5);
 }
 
