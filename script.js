@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
             card.innerHTML = `
                 <div class="card-inner">
                     <div class="card-front">GEDOLIM MATCH</div>
-                    <div class="card-back"><img class="cardpic"></div>
+                    <div class="card-back"><img class="cardpic"></img></div>
                 </div>`;
             gridContainer.appendChild(card);
             card.addEventListener("click", flipCard);
@@ -45,7 +45,12 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
     const cardsDup = document.querySelectorAll(".card"); // updated HTML collection all cards after duplicated
     
+    let clickCount = 0;
+
     function shuffleImages() {
+        clickCount = 0;
+        document.getElementById("click-counter").textContent = `Cards Clicked: ${clickCount}`;
+
         //Duplicate the matches array so that there are two of each element
         const duplicatedMatches = [...matches, ...matches];
         //shuffle the array with the fisher yates algorithm
@@ -66,26 +71,46 @@ document.addEventListener("DOMContentLoaded", ()=> {
         }); 
 
         flippedCards = []; // empty this array upon shuffle
-    }
+        }
 
     document.getElementById("shuffle").addEventListener("click", shuffleImages);
     shuffleImages();
 
     //Flip card function
     function flipCard() {
+        //only counts new clicks
+        if (this.classList.contains("flipped") || flippedCards.length >= 2) {
+            return;
+        }
+
         //Adds or removes card from flipped CSS class
         this.classList.add("flipped");
-        if (flippedCards.length < 1){ // not yet two flipped cards
-            flippedCards.push(this);
-        }
-        else{
-            cardsDup.forEach(card => { 
-                card.removeEventListener("click", flipCard);
-            })
-        }
+        flippedCards.push(this);
         
+        clickCount++;
+        document.getElementById("click-counter").textContent = `Cards Clicked: ${clickCount}`;
+
+
+        if (flippedCards.length === 2){
+            setTimeout(checkMatch, 800);
+        }
     }
-})
+
+    function checkMatch() {
+        let [card1, card2] = flippedCards;
+
+        if(card1.dataset.value === card2.dataset.value){
+            card1.removeEventListener("click", flipCard);
+            card2.removeEventListener("click", flipCard);
+            flippedCards = [];
+        } else {
+            setTimeout (() => {
+                card1.classList.remove("flipped");
+                card2.classList.remove("flipped");
+                flippedCards = [];
+            }, 1000);
+        }
+    }
 
 
-
+});

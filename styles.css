@@ -92,6 +92,12 @@ article p {
 /*******************************************************************/
 
 /* Game Styling */
+
+#click-counter {
+    font-size: 1.5em;
+    margin: 20px 0;
+}
+
 .game {
     margin-top: 100px;
     margin-bottom: 100px;
