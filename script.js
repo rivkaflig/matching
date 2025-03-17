@@ -6,16 +6,16 @@ document.addEventListener("DOMContentLoaded", ()=> {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     const matches = [
-        {id: 1, gadol: "Images/R-Chaim.jpg", dataValue: "RChaim", alt: "Rav-Chaim"},
-        {id: 2, gadol: "Images/R-Edelshtein.jpg", dataValue: "REdelshtein", alt: "Rav-Edelshtein"},
-        {id: 3, gadol: "Images/R-Elyashiv.jpg", dataValue: "RElyashiv", alt: "Rav-Elyashiv"},
-        {id: 4, gadol: "Images/R-Feinstein.jpg", dataValue: "RFeinstein", alt: "Rav-Feinstein"},
-        {id: 5, gadol: "Images/R-Feldman.jpg", dataValue: "RFeldman", alt: "Rav-Feldman"},
-        {id: 6, gadol: "Images/R-Finkel.jpg", dataValue: "RFinkel", alt: "Rav-Finkel"},
-        {id: 7, gadol: "Images/R-Salomon.jpg", dataValue: "RSalomon", alt: "Rav-Salomon"},
-        {id: 8, gadol: "Images/R-Shapiro.jpg", dataValue: "RShapiro", alt: "Rav-Shapiro"},
-        {id: 9, gadol: "Images/R-Shteinman.jpg", dataValue: "RSteinman", alt: "Rav-Sheinman"},
-        {id: 10, gadol: "Images/Steipler-Gaon.jpg", dataValue: "Steipler", alt: "Steipler-Gaon"}
+        {id: 1, gadol: "Images/R-Chaim.jpg", dataValue: "Rav Chaim Kanievsky", alt: "Rav-Chaim"},
+        {id: 2, gadol: "Images/R-Edelstein.jpg", dataValue: "Rav Gershon Edelstein", alt: "Rav-Edelstein"},
+        {id: 3, gadol: "Images/R-Elyashiv.jpg", dataValue: "Rav Yosef Shalom Elyashiv", alt: "Rav-Elyashiv"},
+        {id: 4, gadol: "Images/R-Feinstein.jpg", dataValue: "Rav Moshe Feinstein", alt: "Rav-Feinstein"},
+        {id: 5, gadol: "Images/R-Feldman.jpg", dataValue: "Rav Aharon Feldman", alt: "Rav-Feldman"},
+        {id: 6, gadol: "Images/R-Finkel.jpg", dataValue: "Rav Nosson Tzvi Finkel", alt: "Rav-Finkel"},
+        {id: 7, gadol: "Images/R-Salomon.jpg", dataValue: "Rav Matisyahu Salomon", alt: "Rav-Salomon"},
+        {id: 8, gadol: "Images/R-Shapiro.jpg", dataValue: "Rav Moshe Shapiro", alt: "Rav-Shapiro"},
+        {id: 9, gadol: "Images/R-Shteinman.jpg", dataValue: "Rav Aharon Leib Shteinman", alt: "Rav-Sheinman"},
+        {id: 10, gadol: "Images/Steipler-Gaon.jpg", dataValue: "The Steipler Gaon - Rav Yaakov Yisrael Kanievsky", alt: "Steipler-Gaon"}
     ];
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
         element.addEventListener("click", flipCard);
 
         // Duplicate for 20 cards
-        for (let i =0; i < 19; i++) {
+        for (let i = 0; i < 19; i++) {
 
             // Deep copy - include child elements
             let clone = element.cloneNode(true);
@@ -63,6 +63,11 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
 
     function shuffleImages() {
+        document.getElementById("displayName").textContent = `    `;
+            // Reset click counter and 'You found' if Play Again is pressed
+            clickCount = 0;
+            document.getElementById("click-counter").textContent = `Number of Moves: ${clickCount}`;
+        
         
         //Duplicate the matches array so that there are two of each element
         const duplicatedMatches = [...matches, ...matches];
@@ -77,7 +82,6 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
         // Shuffle the array of matches
         shuffleArray(duplicatedMatches);
-        
         const cardpics = Array.from(document.querySelectorAll(".cardpic"));
         
         // Set each picture to one of the matched pictures and remove it once it has been used
@@ -92,17 +96,18 @@ document.addEventListener("DOMContentLoaded", ()=> {
             for (let i = 0; i <= matchedCards.length; i++) {
                 matchedCards[i].classList.remove("flipped");
             }
-        }
+        } 
 
-        // Empty this array upon shuffle
+        // Empty this array upon shuffle/play again
         flippedCards = [];
 
     } // End of shuffleCards
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    document.getElementById("shuffle").addEventListener("click", shuffleImages);
+    document.getElementById("play-again").addEventListener("click", shuffleImages);
     shuffleImages();
+
 
     // Flip card function
     function flipCard() {
@@ -140,10 +145,23 @@ document.addEventListener("DOMContentLoaded", ()=> {
         // Check against each others HTML (will compare attributes, classes, etc.)
         let card1 = flippedCards[0].innerHTML;
         let card2 = flippedCards[1].innerHTML;
-            
+
         if (card1 === card2) {
             console.log("You got a match!");
-            
+
+            // Get card's string of HTML
+            let card = flippedCards[0].innerHTML;
+
+            // Create a temporary container to parse the HTML
+            let getGadol = document.createElement("div");
+            // Parse the string into an actual element
+            getGadol.innerHTML = card; 
+        
+            // Get data-value value for Gadol's name to display
+            let name = getGadol.querySelector(".card-inner")?.getAttribute("data-value");
+            console.log(name); 
+            document.getElementById("displayName").textContent = `You found ${name}!`;
+
             // Move cards to matched cards array
             matchedCards.push(flippedCards[0], flippedCards[1]);
 
