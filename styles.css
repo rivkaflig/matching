@@ -10,7 +10,7 @@
 /*******************************************************************/
 body {
     font-family: 'Arial', sans-serif;
-    background-image: url('background.jpeg');
+    background-image: url('Images/background.jpeg');
     margin: 0;
     padding: 0;
     display: flex;
