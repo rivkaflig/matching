@@ -20,6 +20,9 @@ document.addEventListener("DOMContentLoaded", ()=> {
     // Holds flipped cards for match verification - Used in flipCard()
     let flippedCards = [];
 
+    // Holds matched cards
+    let matchedCards = [];
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     // HTML collection of element class="card" 
@@ -32,7 +35,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
         element.addEventListener("click", flipCard);
 
         // Duplicate for 20 cards
-        for (let i =0; i < 19; i++){
+        for (let i =0; i < 19; i++) {
 
             // Deep copy - include child elements
             let clone = element.cloneNode(true);
@@ -65,7 +68,6 @@ document.addEventListener("DOMContentLoaded", ()=> {
         // Shuffle the array of matches
         shuffleArray(duplicatedMatches);
         
-        
         const cardpics = Array.from(document.querySelectorAll(".cardpic"));
         
         // Set each picture to one of the matched pictures and remove it once it has been used
@@ -73,56 +75,83 @@ document.addEventListener("DOMContentLoaded", ()=> {
             pic.setAttribute("src", duplicatedMatches[index].gadol);
             pic.setAttribute("alt", duplicatedMatches[index].alt)
             pic.parentElement.parentElement.setAttribute("data-value", duplicatedMatches[index].dataValue);
-        }); 
+        });
+
+        // Reflip all the cards
+        if (matchedCards.length > 0) {
+            for (let i = 0; i <= matchedCards.length; i++) {
+                matchedCards[i].classList.remove("flipped");
+            }
+        }
 
         // Empty this array upon shuffle
         flippedCards = [];
-    }
+
+    } // End of shuffleCards
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     document.getElementById("shuffle").addEventListener("click", shuffleImages);
     shuffleImages();
 
-    //Flip card function
+    // Flip card function
     function flipCard() {
         
         // If card was already clicked
-        if (this.classList.contains("flipped")) {
-            // Don't let user double click a card otherwise they can't flip a 2nd card
-            this.removeEventListener("click", flipCard);
+        if (this.classList.contains("flipped") || flippedCards.length === 2) {
+            return;
+        } 
 
-        } else { 
-            // Adds or removes card from flipped CSS class
-            this.classList.add("flipped");
+        // Adds card to flipped CSS class and flippedCards array for match validtion
+        this.classList.add("flipped");
+        flippedCards.push(this);
+                
+        // If there are 2 flipped cards
+        if (flippedCards.length === 2) {
 
-            // Not yet two flipped cards
-            if (flippedCards.length < 1) {
-                flippedCards.push(this);
+            // Prevent user from clicking more cards
+            cardsDup.forEach(card => card.removeEventListener("click", flipCard));
             
-            } else {
-                // Don't allow more than two cards to be flipped
-                cardsDup.forEach(card => { 
-                    card.removeEventListener("click", flipCard);
-                })
-            }
+            // Delay flip back
+            setTimeout(checkMatch, 2000);
         }
 
-        console.log(flippedCards);
-        // the following does not work as intended!
-        // It is supposed to check if the two elements (cards) in the flippedCards array are identical
-        // =============================================================================================
-        // if (flippedCards[0].getAttribute('data-value') === flippedCards[1].getAttribute('data-value')){
-        //     console.log("You got a match!");
-        // }
-        // else{
-        //     console.log("flip back");
-        //     // flipBack();
-        // }
-        //================================================================================================
+    } // End of flipCard
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////  
+
+    function checkMatch() {
+            
+        // Check against each others HTML (will compare attributes, classes, etc.)
+        let card1 = flippedCards[0].innerHTML;
+        let card2 = flippedCards[1].innerHTML;
+            
+        if (card1 === card2) {
+            console.log("You got a match!");
+            
+            // Move cards to matched cards array
+            matchedCards.push(flippedCards[0], flippedCards[1]);
+
+            // Clear array so new cards can be flipped
+            flippedCards = [];
+
+        
+        } else { // Not a match
+            console.log("No match! Flipping back...");
+            
+            // Flip cards back and empty flippedCards array for next set
+            flippedCards[0].classList.remove("flipped");
+            flippedCards[1].classList.remove("flipped");
+            flippedCards = [];                    
+        }
+
+        // Re-add event listeners for user to be able to click cards
+        cardsDup.forEach(card => { 
+            card.addEventListener("click", flipCard);
+        })
     
-    }
-    
+    } // End of checkMatch
+
 })
 
 
