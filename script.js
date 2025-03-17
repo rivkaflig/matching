@@ -1,6 +1,9 @@
 document.addEventListener("DOMContentLoaded", ()=> {
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////
+    const gridContainer = document.querySelector(".grid-container");
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     const matches = [
         {id: 1, gadol: "Images/R-Chaim.jpg", dataValue: "RChaim", alt: "Rav-Chaim"},
@@ -40,21 +43,28 @@ document.addEventListener("DOMContentLoaded", ()=> {
             // Deep copy - include child elements
             let clone = element.cloneNode(true);
             element.parentNode.appendChild(clone);
+            
+            // Add dups to grid
+            gridContainer.appendChild(clone);
+
 
             // Add event listener for clones
             clone.addEventListener("click", flipCard);
-        } // End of for loop
-
-    })) // End of duplication
+        }
+    }))
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     // Updated HTML collection all cards after duplicated
-    const cardsDup = document.querySelectorAll(".card");
+    const cardsDup = document.querySelectorAll(".card"); // updated HTML collection all cards after duplicated
     
-    function shuffleImages() {
+    let clickCount = 0;
+    document.getElementById("click-counter").textContent = `Number of Moves: ${clickCount}`;
 
-        // Duplicate the matches array so that there are two of each element
+
+    function shuffleImages() {
+        
+        //Duplicate the matches array so that there are two of each element
         const duplicatedMatches = [...matches, ...matches];
         
         // Shuffle the array with the fisher yates algorithm
@@ -105,20 +115,25 @@ document.addEventListener("DOMContentLoaded", ()=> {
         // Adds card to flipped CSS class and flippedCards array for match validtion
         this.classList.add("flipped");
         flippedCards.push(this);
-                
+
+        // Increment click counter with every card pressed
+        clickCount++;
+        document.getElementById("click-counter").textContent = `Number of Moves: ${clickCount}`;
+
         // If there are 2 flipped cards
         if (flippedCards.length === 2) {
 
             // Prevent user from clicking more cards
             cardsDup.forEach(card => card.removeEventListener("click", flipCard));
-            
+                
             // Delay flip back
-            setTimeout(checkMatch, 2000);
+            setTimeout(checkMatch, 1500);
         }
 
     } // End of flipCard
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////  
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////  
 
     function checkMatch() {
             
@@ -153,6 +168,8 @@ document.addEventListener("DOMContentLoaded", ()=> {
     } // End of checkMatch
 
 })
+
+
 
 
 

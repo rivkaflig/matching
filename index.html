@@ -4,23 +4,25 @@
     <title>ThrowdownGames.io</title>
     <link rel="icon" type="image/svg+xml" href="Images/favicon.svg">
     <link rel="stylesheet" href="styles.css">
-    
+
 </head>
 
-    <body>
+<body>
 
-        <header>
-            <h2>ThrowdownGames</h2>
-            <h1>GEDOLIM MATCH</h1>
-            <p>Test your memory, discover their legacy!</p>
-        </header>
+    <header>
+        <h2>ThrowdownGames</h2>
+        <h1>GEDOLIM MATCH</h1>
+        <p>Test your memory, discover their legacy!</p>
+    </header>
 
-        <!-- Website Content -->
-        <article>
+    <!-- Website Content -->
+    <article>
+        <div class="instructions-box">
 
             <p><strong>Welcome to Gedolim Match!</strong></br>
-                Test your memory and knowledge of our great Torah leaders with this fun and educational matching game!</p>
- 
+                Test your memory and knowledge of our great Torah leaders with this fun and educational matching game!
+            </p>
+
             <p><strong>How to Play</strong></br>
                 Click on two cards to reveal the hidden faces.</br>
                 If they match, they stay uncovered!</br>
@@ -31,36 +33,39 @@
                 Learn to recognize the faces of Gedolim from different generations.</br>
                 Strengthen your memory and concentration.</br>
                 Enjoy a meaningful and engaging game for all ages.</p>
-        
-        </article>
 
-        <!-- Div for all game content -->
-        <div class="game">
+        </div>
 
-            <!-- Matches -->
+        <p id="click-counter">Number of Moves: 0</p>
+
+    </article>
+
+    <!-- Div for all game content -->
+    <div class="game">
+        <div class="grid-container">
+        <!-- Matches -->
             <div class="matches">
-                
                 <div class="card">
                     <div class="card-inner">
                         <div class="card-front">GEDOLIM MATCH</div>
-                        <div class="card-back"><img class = "cardpic"></div>
+                        <div class="card-back"><img class="cardpic"></div>
                     </div>
                 </div>
-
             </div>
-
         </div>
-        
-        <button id="shuffle">Shuffle</button>
+    </div>
 
-        </hr>
+    
+    <button id="shuffle">Shuffle</button>
 
-        <footer>
-            <p>&copy; 2025 ThrowdownGames.io | <a href="mailto:rcflig@wits.edu" class="text-white">rcflig@wits.edu</a></p>
-        </footer>
+    </hr>
 
-    </body>
+    <footer>
+        <p>&copy; 2025 ThrowdownGames.io | <a href="mailto:rcflig@wits.edu" class="text-white">rcflig@wits.edu</a></p>
+    </footer>
 
-    <script src="script.js"></script>
+</body>
+
+<script src="script.js"></script>
 
 </html>
