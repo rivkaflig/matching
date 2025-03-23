@@ -226,7 +226,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
     function resetTimer(){
         clearInterval(timer);
-        secondsElapsed =0;
+        secondsElapsed = 0;
         timerElement.textContent = `Time: 0s`;
         gameStarted = false;
     }
