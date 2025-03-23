@@ -128,9 +128,6 @@ document.addEventListener("DOMContentLoaded", ()=> {
             clickCount++;
 
             document.getElementById("click-counter").textContent = `Number of Moves: ${clickCount}`;
-
-            // Prevent user from clicking more cards
-           //  cardsDup.forEach(card => card.removeEventListener("click", flipCard));
                 
             // Delay flip back
             setTimeout(checkMatch, 1500);
@@ -146,15 +143,8 @@ document.addEventListener("DOMContentLoaded", ()=> {
         let card1 = flippedCards[0].innerHTML;
         let card2 = flippedCards[1].innerHTML;
 
-        let exclaim = document.getElementById("exclaim");
-
         if (card1 === card2) {
             showPopupCheck();
-            exclaim.innerHTML= "Great Job!";
-            exclaim.style.setProperty('display', 'block');
-            setTimeout(() => {
-                exclaim.style.display = 'none';
-            }, 2000); // 3 seconds
 
             // Add the animation class to the matched cards
             flippedCards[0].classList.add("match-animation");
@@ -183,19 +173,13 @@ document.addEventListener("DOMContentLoaded", ()=> {
             if (matchedCards.length === cardsDup.length) {
                 gameOver();
             }
-
         
         } else { // Not a match
             showPopupX();
-            exclaim.innerHTML= "Try again.";
-            exclaim.style.setProperty('display', 'block');
-            setTimeout(() => {
-                exclaim.style.display = 'none';
-            }, 2000); // 3 seconds
 
             flippedCards[0].classList.add("wrong-animation");
             flippedCards[1].classList.add("wrong-animation");
-            setTimeout(flipBack, 2000);
+            setTimeout(flipBack, 1000);
                              
         }
 
@@ -239,22 +223,22 @@ document.addEventListener("DOMContentLoaded", ()=> {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////  
 
     function showPopupX() {
-        const popup = document.getElementById('x');
-        popup.style.setProperty('display', 'block');
+        const popup = document.getElementById('x'); // node to display x
+        popup.style.setProperty('display', 'block'); // make visible
 
-        // Optional: Automatically hide after a few seconds
+        // Automatically hide after half of a second
         setTimeout(() => {
             popup.style.display = 'none';
-        }, 1500); // 3 seconds 
+        }, 500);
     }
     function showPopupCheck() {
-        const popup = document.getElementById('check');
-        popup.style.setProperty('display', 'block');
+        const popup = document.getElementById('check'); // node to display check
+        popup.style.setProperty('display', 'block'); // make visible
 
-        // only show for a few seconds
+        // only show for half of a second
         setTimeout(() => {
             popup.style.display = 'none';
-        }, 2000); // 3 seconds
+        }, 500);
     }
 
     // game completed

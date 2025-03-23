@@ -257,7 +257,6 @@ footer a:hover {
     50% {                   /* Grow and opaque */
         transform: scale(1.2); 
         opacity: 0.7;
-        background-color: lightgreen;
     }
     100% {
         transform: scale(1); /* Return to original size */
@@ -285,6 +284,7 @@ footer a:hover {
     80% { transform: translate(-1px, -1px) rotate(1deg); }
     90% { transform: translate(1px, 2px) rotate(0deg); }
     100% { transform: translate(1px, -2px) rotate(-1deg); }
+    
   }
 .red-background{
     border-color: (100%, 0, 0, 0.5);
