@@ -2,6 +2,10 @@ document.addEventListener("DOMContentLoaded", ()=> {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     const gridContainer = document.querySelector(".grid-container");
+    const timerElement = document.getElementById("timer");
+    let timer;
+    let secondsElapsed = 0;
+    let gameStarted = false;
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -117,19 +121,27 @@ document.addEventListener("DOMContentLoaded", ()=> {
             return;
         } 
 
+        if(!gameStarted) {
+            startTimer();
+            gameStarted = true;
+        }
+
         // Adds card to flipped CSS class and flippedCards array for match validtion
         this.classList.add("flipped");
         flippedCards.push(this);
 
         // Increment click counter with every card pressed
-        clickCount++;
-        document.getElementById("click-counter").textContent = `Number of Moves: ${clickCount}`;
+        
 
         // If there are 2 flipped cards
         if (flippedCards.length === 2) {
 
+            clickCount++;
+
+            document.getElementById("click-counter").textContent = `Number of Moves: ${clickCount}`;
+
             // Prevent user from clicking more cards
-            cardsDup.forEach(card => card.removeEventListener("click", flipCard));
+           //  cardsDup.forEach(card => card.removeEventListener("click", flipCard));
                 
             // Delay flip back
             setTimeout(checkMatch, 1500);
@@ -184,6 +196,26 @@ document.addEventListener("DOMContentLoaded", ()=> {
         })
     
     } // End of checkMatch
+
+    function startTimer() {
+        secondsElapsed = 0;
+        timerElement.textContent = `Time: 0s`;
+        timer = setInterval(() =>{
+            secondsElapsed++;
+            timerElement.textContent = `Time: ${secondsElapsed}s`;
+        }, 1000);
+    }
+
+    function stopTimer() {
+        clearInterval(timer);
+    }
+
+    function resetTimer(){
+        clearInterval(timer);
+        secondsElapsed =0;
+        timerElement.textContent = `Time: 0s`;
+        gameStarted = false;
+    }
 
 })
 
