@@ -209,6 +209,8 @@ document.addEventListener("DOMContentLoaded", ()=> {
     
     } // End of checkMatch
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////  
+
     function startTimer() {
         secondsElapsed = 0;
         timerElement.textContent = `Time: 0s`;
@@ -229,6 +231,8 @@ document.addEventListener("DOMContentLoaded", ()=> {
         gameStarted = false;
     }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////  
+
     function showPopupX() {
         const popup = document.getElementById('x');
         popup.style.setProperty('display', 'block');
@@ -247,6 +251,9 @@ document.addEventListener("DOMContentLoaded", ()=> {
             popup.style.display = 'none';
         }, 2000); // 3 seconds
     }
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////  
 
 })
 
