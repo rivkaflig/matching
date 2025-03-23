@@ -179,6 +179,11 @@ document.addEventListener("DOMContentLoaded", ()=> {
             // Clear array so new cards can be flipped
             flippedCards = [];
 
+            // checks if game is over
+            if (matchedCards.length === cardsDup.length) {
+                gameOver();
+            }
+
         
         } else { // Not a match
             showPopupX();
@@ -240,7 +245,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
         // Optional: Automatically hide after a few seconds
         setTimeout(() => {
             popup.style.display = 'none';
-        }, 2000); // 3 seconds
+        }, 1500); // 3 seconds 
     }
     function showPopupCheck() {
         const popup = document.getElementById('check');
@@ -252,6 +257,17 @@ document.addEventListener("DOMContentLoaded", ()=> {
         }, 2000); // 3 seconds
     }
 
+    function gameOver() {
+        const popup = document.getElementById('gameOver');
+        popup.style.setProperty('display', 'block');
+    }
+
+    function resetGame() {
+        matchedCards = [];
+        flippedCards = [];
+        shuffleImages();
+        resetTimer();
+    }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////  
 

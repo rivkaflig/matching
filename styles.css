@@ -22,6 +22,7 @@ body {
 
 .grid-container {
     display: grid;
+    margin-top: 80px;
 
     /* Adjust columns and rows dynamically */
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
@@ -195,6 +196,11 @@ article p {
     object-fit: cover;
 }
 
+/* You found.. */
+#displayName {
+    top: 10%;
+    z-index: 1001; /* above cards */
+}
 
 /*******************************************************************/
 /* Play Again Button Styling */
@@ -300,13 +306,28 @@ footer a:hover {
     z-index: 1000; /* Ensure it appears over other content */
     text-shadow: 5px 5px rgb(91, 246, 101);
 }
-#exclaim{
+/*#exclaim{
     display: none;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: 100px;
-    color: rgba(143, 86, 12);
-    z-index: 1001; /* Right above the check or X */
+    color: rgb(83, 12, 12);
+    z-index: 1001; --Right above the check or X
+} */
+
+#gameOver {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 100px;
+}
+
+#gameOver img {
+    width: 150px;
+    height: auto;
+    margin-bottom: 10px;
 }
