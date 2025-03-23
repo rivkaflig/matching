@@ -257,6 +257,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
         }, 2000); // 3 seconds
     }
 
+    // game completed
     function gameOver() {
         const popup = document.getElementById('gameOver');
         popup.style.setProperty('display', 'block');
