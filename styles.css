@@ -122,9 +122,22 @@ article p {
 
     /* Set gap between rows and columns */
     gap: 25px;
-    max-width: 60vw;
+    max-width: 80vw;
     justify-content: center;
 }
+
+@media screen and (min-width: 1206px) {
+    .grid-container {width: 70vw}
+}
+
+@media screen and (min-width: 1379px) {
+    .grid-container {width: 60vw}
+}
+
+@media screen and (min-width: 1608px) {
+    .grid-container {width: 50vw}
+}
+
 
 /*******************************************************************/
 /* Cards */
