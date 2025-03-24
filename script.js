@@ -256,7 +256,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
     
             // Automatically hide after half of a second
             setTimeout(() => {
-                popup.style.display = 'none';
+                popup.style.setProperty('display', 'none');
             }, 500);
         }
     
@@ -281,7 +281,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
     
             // Show for a minute
             setTimeout(() => {
-                popup.style.display = 'none';
+                popup.style.setProperty('display', 'none');
                 }, 60000);
         }
     
