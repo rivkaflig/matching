@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", ()=> {
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     const gridContainer = document.querySelector(".grid-container");
     const timerElement = document.getElementById("timer");
@@ -7,7 +8,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
     let secondsElapsed = 0;
     let gameStarted = false;
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     const matches = [
         {id: 1, gadol: "Images/R-Chaim.jpg", dataValue: "Rav Chaim Kanievsky", alt: "Rav-Chaim"},
@@ -32,29 +33,32 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
 //////////////////////////////  DUPLICATE  ////////////////////////////////////////////////////////////////////////////
 
-        //Duplicate initial card 19 times
-        let card = document.querySelector(".card");
-        card.addEventListener("click", flipCard);
+    //Duplicate initial card 19 times
+    let card = document.querySelector(".card");
+    card.addEventListener("click", flipCard);
 
-        // Duplicate to get 20 cards
-        for (let i = 0; i < 19; i++) {
-            // Deep copy - include child elements
-            let clone = card.cloneNode(true);
-            card.parentNode.appendChild(clone);
+    // Duplicate to get 20 cards
+    for (let i = 0; i < 19; i++) {
+        // Deep copy - include child elements
+        let clone = card.cloneNode(true);
+        card.parentNode.appendChild(clone);
             
-            // Add duplicated cards to grid
-            gridContainer.appendChild(clone);
+        // Add duplicated cards to grid
+        gridContainer.appendChild(clone);
 
-            // Add event listener to each card
-            clone.addEventListener("click", flipCard);
-        }
+        // Add event listener to each card
+        clone.addEventListener("click", flipCard);
+    }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Shuffle cards operation for beginning a game and playing again
+// Sets all game stats to zero and resets them when playing again
 
     // HTML collection of all cards after duplicated
     const cardsDup = document.querySelectorAll(".card");
     
     let clickCount = 0;
+
     document.getElementById("click-counter").textContent = `Number of Moves: ${clickCount}`;
 
     function shuffleImages() {
@@ -63,11 +67,11 @@ document.addEventListener("DOMContentLoaded", ()=> {
         for (let card of cardsDup){
             card.classList.remove("flipped");
         }
+
         document.getElementById("displayName").textContent = `    `;
             // Reset click counter and 'You found' if Play Again is pressed
             clickCount = 0;
             document.getElementById("click-counter").textContent = `Number of Moves: ${clickCount}`;
-        
         
         //Duplicate the matches array so that there are two of each element
         const duplicatedMatches = [...matches, ...matches];
@@ -93,14 +97,15 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
         // Empty this array upon shuffle/play again
         flippedCards = [];
+        resetTimer();
 
     } // End of shuffleCards
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     document.getElementById("play-again").addEventListener("click", shuffleImages);
     shuffleImages();
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Flip cards operation for checking if two cards are flipped
 
     // Flip card function
     function flipCard() {
@@ -117,16 +122,11 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
         // Adds card to flipped CSS class and flippedCards array for match validtion
         this.classList.add("flipped");
-        flippedCards.push(this);
-
-        // Increment click counter with every card pressed
-        
+        flippedCards.push(this);        
 
         // If there are 2 flipped cards
         if (flippedCards.length === 2) {
-
             clickCount++;
-
             document.getElementById("click-counter").textContent = `Number of Moves: ${clickCount}`;
                 
             // Delay flip back
@@ -135,8 +135,8 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
     } // End of flipCard
 
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////  
+// Check match operation for checking if two flipped cards are a match and animations for yes or no
 
     function checkMatch() {
         // Check against each others HTML (will compare attributes, classes, etc.)
@@ -172,15 +172,15 @@ document.addEventListener("DOMContentLoaded", ()=> {
             // checks if game is over
             if (matchedCards.length === cardsDup.length) {
                 gameOver();
+                stopTimer();
             }
         
+        // Animations for not a match
         } else { // Not a match
             showPopupX();
-
             flippedCards[0].classList.add("wrong-animation");
             flippedCards[1].classList.add("wrong-animation");
-            setTimeout(flipBack, 1000);
-                             
+            setTimeout(flipBack, 1000);                    
         }
 
         // Re-add event listeners for user to be able to click cards
@@ -188,7 +188,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
             card.addEventListener("click", flipCard);
         })
 
-        function flipBack(){
+        function flipBack() {
             flippedCards[0].classList.remove("flipped");
             flippedCards[1].classList.remove("flipped");
             flippedCards[0].classList.remove("wrong-animation"); // Remove wrong-animation
@@ -199,14 +199,16 @@ document.addEventListener("DOMContentLoaded", ()=> {
     } // End of checkMatch
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////  
+// Timer for game stats
 
     function startTimer() {
+        // Set timer to 00:00
         secondsElapsed = 0;
         timerElement.textContent = `Time: 00:00`;
-        timer = setInterval(() =>{
+        
+        timer = setInterval(() => {
             secondsElapsed++;
-
-            // calculate in min and sec
+            // Calculate in minutes and seconds
             let minutes = Math.floor(secondsElapsed/60);
             let seconds = secondsElapsed % 60;
             let formattedTime = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
@@ -214,21 +216,25 @@ document.addEventListener("DOMContentLoaded", ()=> {
         }, 1000);
     }
 
+    // Stop timer function - called when all 24 cards are match
     function stopTimer() {
         clearInterval(timer);
     }
 
-    function resetTimer(){
+    // Reset timer funvtion - called when user clicks play again
+    function resetTimer() {
         clearInterval(timer);
         secondsElapsed = 0;
-        timerElement.textContent = `Time: 0s`;
+        timerElement.textContent = `Time: 00:00`;
         gameStarted = false;
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////  
+// Pop up animations for card validation
 
     function showPopupX() {
-        const popup = document.getElementById('x'); // node to display x
+        // Node to display x
+        const popup = document.getElementById('x'); 
         popup.style.setProperty('display', 'block'); // make visible
 
         // Automatically hide after half of a second
@@ -236,27 +242,24 @@ document.addEventListener("DOMContentLoaded", ()=> {
             popup.style.display = 'none';
         }, 500);
     }
+
     function showPopupCheck() {
-        const popup = document.getElementById('check'); // node to display check
+        // Node to display check
+        const popup = document.getElementById('check'); 
         popup.style.setProperty('display', 'block'); // make visible
 
-        // only show for half of a second
+        // Only show for half of a second
         setTimeout(() => {
             popup.style.display = 'none';
-        }, 500);
+        }, 300);
     }
 
-    // game completed
+//////////////////////////////////////////////////////////////////////////////////////////////////////  
+// Game completed
+
     function gameOver() {
         const popup = document.getElementById('gameOver');
         popup.style.setProperty('display', 'block');
-    }
-
-    function resetGame() {
-        matchedCards = [];
-        flippedCards = [];
-        shuffleImages();
-        resetTimer();
     }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////  
