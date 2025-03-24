@@ -14,4 +14,4 @@ Match all the pairs to win the game!
 >* Strengthen your memory and concentration.
 >* Enjoy a meaningful and engaging game for all ages.
 
-[Visit us on our Website](Throwdowngames.com).
+[Visit us on our Website](https://rivkaflig.github.io/matching/).
