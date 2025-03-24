@@ -104,6 +104,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
     
             // Empty this array upon shuffle/play again
             flippedCards = [];
+            matchedCards = [];
             resetTimer();
     
             // Remove game completion animation
