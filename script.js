@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
                     pic.setAttribute("alt", duplicatedMatches[index].alt)
                     pic.parentElement.parentElement.setAttribute("data-value", duplicatedMatches[index].dataValue);
                 });
-            }, 1000);
+            }, 500);
     
             // Empty this array upon shuffle/play again
             flippedCards = [];
