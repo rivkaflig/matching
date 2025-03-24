@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
             // Reflip all the cards
             for (let card of cardsDup){
                 card.classList.remove("flipped");
-                card.classList.remove("match-animation")
+                card.classList.remove("match-animation");
             }
     
             document.getElementById("displayName").textContent = `    `;
