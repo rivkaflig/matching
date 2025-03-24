@@ -277,7 +277,9 @@ document.addEventListener("DOMContentLoaded", ()=> {
         function gameOver() {
             // Show game completion animation
             const popup = document.getElementById('gameOver');
-            popup.style.setProperty('display', 'block');
+            setTimeout(() => {
+                popup.style.setProperty('display', 'block');
+            }, 1000)
     
             // Show for a minute
             setTimeout(() => {
