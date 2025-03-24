@@ -89,15 +89,17 @@ document.addEventListener("DOMContentLoaded", ()=> {
             }
     
             // Shuffle the array of matches
-            shuffleArray(duplicatedMatches);
-            const cardpics = Array.from(document.querySelectorAll(".cardpic"));
-            
-            // Set each picture to one of the matched pictures and remove it once it has been used
-            cardpics.forEach(function (pic, index) {
-                pic.setAttribute("src", duplicatedMatches[index].gadol);
-                pic.setAttribute("alt", duplicatedMatches[index].alt)
-                pic.parentElement.parentElement.setAttribute("data-value", duplicatedMatches[index].dataValue);
-            });
+            setTimeout(() => { // Timeout so user doesn't see cards changing as they're flipped
+                shuffleArray(duplicatedMatches);
+                const cardpics = Array.from(document.querySelectorAll(".cardpic"));
+                
+                // Set each picture to one of the matched pictures and remove it once it has been used
+                cardpics.forEach(function (pic, index) {
+                    pic.setAttribute("src", duplicatedMatches[index].gadol);
+                    pic.setAttribute("alt", duplicatedMatches[index].alt)
+                    pic.parentElement.parentElement.setAttribute("data-value", duplicatedMatches[index].dataValue);
+                });
+            }, 500);
     
             // Empty this array upon shuffle/play again
             flippedCards = [];
