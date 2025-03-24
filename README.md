@@ -18,4 +18,4 @@ Match all the pairs to win the game!
 >* Strengthen your memory and concentration.
 >* Enjoy a meaningful and engaging game for all ages.
 
-<a href="(https://rivkaflig.github.io/matching/)" target="_blank">Visit us on our Website</a>
+<a href="https://rivkaflig.github.io/matching/" target="_blank">Visit us on our Website</a>
