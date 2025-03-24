@@ -173,6 +173,12 @@ document.addEventListener("DOMContentLoaded", ()=> {
                 let name = getGadol.querySelector(".card-inner")?.getAttribute("data-value");
                 console.log(name); 
                 document.getElementById("displayName").textContent = `You found ${name}!`;
+
+                // Remove animation class
+                setTimeout(() => {
+                    flippedCards[0].classList.remove("match-animation");
+                    flippedCards[1].classList.remove("match-animation");
+                }, 1000);
                 
                 // Move cards to matched cards array
                 matchedCards.push(flippedCards[0], flippedCards[1]);
@@ -250,7 +256,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
     
             // Automatically hide after half of a second
             setTimeout(() => {
-                popup.style.display = 'none';
+                popup.style.setProperty('display', 'none');
             }, 500);
         }
     
@@ -277,7 +283,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
     
             // Show for a minute
             setTimeout(() => {
-                popup.style.display = 'none';
+                popup.style.setProperty('display', 'none');
                 }, 60000);
         }
     
