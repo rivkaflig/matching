@@ -273,7 +273,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
             const popup = document.getElementById('gameOver');
             setTimeout(() => {
                 popup.style.setProperty('display', 'block');
-            }, 2000)
+            }, 1000)
     
             // Show for a minute
             setTimeout(() => {
