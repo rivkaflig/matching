@@ -229,18 +229,19 @@ article p {
 }
 
 @keyframes matchEffect {
-    0% {
-        transform: scale(1); /* Start with original size */
+    0% { /* Start with original size */
+        transform: scale(1);
         opacity: 1;
     }
-    50% {                   /* Grow and opaque */
-        transform: scale(1.2); 
-        opacity: 0.7;
+
+    50% { /* Grow and opaque */
+        transform: scale(1.08); 
+        opacity: 0.88;
     }
-    100% {
-        transform: scale(1); /* Return to original size */
+
+    100% { /* Return to original size */
+        transform: scale(1); 
         opacity: 1;
-        background-color: white;
     }
 }
 
