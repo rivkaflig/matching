@@ -202,10 +202,15 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
     function startTimer() {
         secondsElapsed = 0;
-        timerElement.textContent = `Time: 0s`;
+        timerElement.textContent = `Time: 00:00`;
         timer = setInterval(() =>{
             secondsElapsed++;
-            timerElement.textContent = `Time: ${secondsElapsed}s`;
+
+            // calculate in min and sec
+            let minutes = Math.floor(secondsElapsed/60);
+            let seconds = secondsElapsed % 60;
+            let formattedTime = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            timerElement.textContent = `Time: ${formattedTime}`;
         }, 1000);
     }
 
