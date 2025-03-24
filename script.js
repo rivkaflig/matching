@@ -165,6 +165,11 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
             // Move cards to matched cards array
             matchedCards.push(flippedCards[0], flippedCards[1]);
+            
+            // If all 24 cards are matched stop timer
+            if (matchedCards.length === 20) {
+                stopTimer();
+            }
 
             // Clear array so new cards can be flipped
             flippedCards = [];
@@ -172,7 +177,6 @@ document.addEventListener("DOMContentLoaded", ()=> {
             // checks if game is over
             if (matchedCards.length === cardsDup.length) {
                 gameOver();
-                stopTimer();
             }
         
         // Animations for not a match
