@@ -99,6 +99,10 @@ document.addEventListener("DOMContentLoaded", ()=> {
         flippedCards = [];
         resetTimer();
 
+        // Remove game completion animation
+        const popup = document.getElementById('gameOver');
+        popup.style.display = 'none';
+
     } // End of shuffleCards
 
     document.getElementById("play-again").addEventListener("click", shuffleImages);
@@ -258,8 +262,14 @@ document.addEventListener("DOMContentLoaded", ()=> {
 // Game completed
 
     function gameOver() {
+        // Show game completion animation
         const popup = document.getElementById('gameOver');
         popup.style.setProperty('display', 'block');
+
+        // Show for a minute
+        setTimeout(() => {
+            popup.style.display = 'none';
+            }, 60000);
     }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////  
