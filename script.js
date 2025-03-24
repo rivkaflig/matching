@@ -173,7 +173,13 @@ document.addEventListener("DOMContentLoaded", ()=> {
                 let name = getGadol.querySelector(".card-inner")?.getAttribute("data-value");
                 console.log(name); 
                 document.getElementById("displayName").textContent = `You found ${name}!`;
-    
+
+                // Remove animation class
+                setTimeout(() => {
+                    flippedCards[0].classList.remove("match-animation");
+                    flippedCards[1].classList.remove("match-animation");
+                }, 1000);
+                
                 // Move cards to matched cards array
                 matchedCards.push(flippedCards[0], flippedCards[1]);
     
