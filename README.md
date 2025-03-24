@@ -1,3 +1,7 @@
+<!-- Gedolim Matching Game
+Hailey Lazar, Rivka Flig, Leah Feldman
+3/24/2025 -->
+
 # Gedolim Matching
 ### Test your memory and knowledge of our great Torah leaders with this fun and educational matching game!
 
